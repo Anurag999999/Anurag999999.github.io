@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Welcome to My Blog",
+    "date": "2026-08-20",
+    "slug": "welcome",
+    "excerpt": "A short introduction to this blog and what I plan to write about."
+  },
+  {
+    "title": "Getting Started with Static Sites",
+    "date": "2026-08-25",
+    "slug": "static-sites",
+    "excerpt": "Why static sites are a great fit for personal blogs and small projects."
+  }
+]
