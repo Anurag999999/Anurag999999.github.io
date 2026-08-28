@@ -35,4 +35,9 @@ function formatDate(dateStr) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", loadPostList);
+// Run immediately if DOM is ready, or wait for it
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", loadPostList);
+} else {
+  loadPostList();
+}
