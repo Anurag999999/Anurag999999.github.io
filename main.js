@@ -22,7 +22,8 @@ async function loadPostList() {
       )
       .join("");
   } catch (err) {
-    listEl.innerHTML = `<li class="post-item">Could not load posts. ${err.message}</li>`;
+    listEl.innerHTML = `<li class="post-item error">Could not load posts. ${err.message}</li>`;
+    console.error("Error loading posts:", err);
   }
 }
 
