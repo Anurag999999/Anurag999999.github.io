@@ -15,7 +15,8 @@ async function loadPost() {
     const markdown = await response.text();
 
     // marked.js (loaded via CDN in post.html) converts Markdown to HTML
-    contentEl.innerHTML = marked.parse(markdown);
+    // Use marked() instead of marked.parse() for compatibility
+    contentEl.innerHTML = marked(markdown);
     document.title = slug + " · My Blog";
   } catch (err) {
     contentEl.innerHTML = `<p>Sorry, this post could not be loaded. ${err.message}</p>`;
