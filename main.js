@@ -3,7 +3,7 @@ async function loadPostList() {
   const listEl = document.getElementById("post-list");
 
   try {
-    const response = await fetch("posts/posts.json");
+    const response = await fetch("posts.json");
     if (!response.ok) throw new Error("Could not load posts.json");
     const posts = await response.json();
 
