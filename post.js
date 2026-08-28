@@ -1,4 +1,4 @@
-// Reads ?slug=... from the URL, loads posts/<slug>.md, and renders it as HTML.
+// Reads ?slug=... from the URL, loads <slug>.md, and renders it as HTML.
 async function loadPost() {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get("slug");
@@ -10,7 +10,7 @@ async function loadPost() {
   }
 
   try {
-    const response = await fetch(`posts/${slug}.md`);
+    const response = await fetch(`${slug}.md`);
     if (!response.ok) throw new Error("Post not found");
     const markdown = await response.text();
 
@@ -22,4 +22,9 @@ async function loadPost() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", loadPost);
+// Run immediately if DOM is ready, or wait for it
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", loadPost);
+} else {
+  loadPost();
+}
