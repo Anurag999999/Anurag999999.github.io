@@ -1,29 +1,24 @@
-// Reads ?slug=... from the URL, loads <slug>.md, and renders it as HTML.
+// Loads a single post by slug and renders it
 async function loadPost() {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get("slug");
-  const contentEl = document.getElementById("post-content");
 
   if (!slug) {
-    contentEl.innerHTML = "<p>No post specified.</p>";
+    document.getElementById("post-content").innerHTML = "<p>Post not found.</p>";
     return;
   }
 
   try {
-    const response = await fetch(`${slug}.md`);
+    const response = await fetch(`posts/${slug}.md`);
     if (!response.ok) throw new Error("Post not found");
     const markdown = await response.text();
-
-    // marked.js (loaded via CDN in post.html) converts Markdown to HTML
-    // Use marked() instead of marked.parse() for compatibility
-    contentEl.innerHTML = marked(markdown);
-    document.title = slug + " · My Blog";
+    
+    document.getElementById("post-content").innerHTML = marked.parse(markdown);
   } catch (err) {
-    contentEl.innerHTML = `<p>Sorry, this post could not be loaded. ${err.message}</p>`;
+    document.getElementById("post-content").innerHTML = `<p>Error loading post: ${err.message}</p>`;
   }
 }
 
-// Run immediately if DOM is ready, or wait for it
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", loadPost);
 } else {
